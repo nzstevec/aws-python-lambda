@@ -9,7 +9,7 @@ Resources:
               print('Hello, world!')
       Handler: index.lambda_handler
       Role: !GetAtt MyLambdaExecutionRole.Arn
-      Runtime: python3.10
+      Runtime: python3.12
   MyLambdaExecutionRole:
     Type: AWS::IAM::Role
     Properties:
