@@ -1,0 +1,23 @@
+version: 0.2
+env:
+  variables:
+    S3_BUCKET: "nzqa.pipeline.artifact"
+phases:
+  install:
+    on-failure: ABORT
+    runtime-versions:
+      python: 3.12
+    commands:
+      - echo START
+  build:
+    on-failure: ABORT
+    commands:
+      - echo Build started on `date`
+      - sam build && sam package --region ap-southeast-2 --s3-bucket ${S3_BUCKET} --output-template-file packaged-template.yml
+  post_build:
+    on-failure: ABORT
+    commands:
+      - echo FINISH
+artifacts:
+  files:
+    - packaged-template.yml
